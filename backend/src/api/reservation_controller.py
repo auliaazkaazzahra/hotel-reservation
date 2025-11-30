@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from datetime import date
@@ -6,6 +6,8 @@ from decimal import Decimal
 
 from ..application.reservation_service import ReservationService
 from ..infrastructure.reservation_repository import ReservationRepository
+from .dependencies import get_current_active_user
+from ..infrastructure.auth import User
 
 # Inisialisasi dependency
 repository = ReservationRepository()
@@ -107,9 +109,13 @@ class ReservationResponse(BaseModel):
     summary="Create New Reservation",
     description="Membuat reservasi baru dengan detail kamar"
 )
-async def create_reservation(request: CreateReservationRequest):
+async def create_reservation(
+    request: CreateReservationRequest,
+    current_user: User = Depends(get_current_active_user)
+    ):
     """
     Endpoint untuk membuat reservasi baru
+    Requires: Valid JWT token
     """
     try:
         room_details_dict = [
@@ -149,7 +155,10 @@ async def create_reservation(request: CreateReservationRequest):
     summary="Get Reservation by ID",
     description="Mengambil detail reservasi berdasarkan ID"
 )
-async def get_reservation(reservation_id: str):
+async def get_reservation(
+    reservation_id: str,
+    current_user: User = Depends(get_current_active_user)
+    ):
     """
     Endpoint untuk mengambil detail reservasi
     """
@@ -170,7 +179,10 @@ async def get_reservation(reservation_id: str):
     summary="Get All Reservations",
     description="Mengambil semua reservasi atau filter berdasarkan customer"
 )
-async def get_reservations(customer_id: Optional[str] = None):
+async def get_reservations(
+    customer_id: Optional[str] = None,
+    current_user: User = Depends(get_current_active_user)
+    ):
     """
     Endpoint untuk mengambil daftar reservasi
     Query param customer_id untuk filter berdasarkan customer
@@ -191,7 +203,8 @@ async def get_reservations(customer_id: Optional[str] = None):
 )
 async def add_room_to_reservation(
     reservation_id: str,
-    request: AddRoomRequest
+    request: AddRoomRequest,
+    current_user: User = Depends(get_current_active_user)
 ):
     """
     Endpoint untuk menambah kamar ke reservasi
@@ -222,7 +235,8 @@ async def add_room_to_reservation(
 )
 async def confirm_payment(
     reservation_id: str,
-    request: ConfirmPaymentRequest
+    request: ConfirmPaymentRequest,
+    current_user: User = Depends(get_current_active_user)
 ):
     """
     Endpoint untuk konfirmasi pembayaran
@@ -248,7 +262,10 @@ async def confirm_payment(
     summary="Confirm Reservation",
     description="Konfirmasi reservasi oleh pihak hotel"
 )
-async def confirm_reservation(reservation_id: str):
+async def confirm_reservation(
+    reservation_id: str,
+    current_user: User = Depends(get_current_active_user)
+    ):
     """
     Endpoint untuk konfirmasi reservasi oleh hotel
     """
@@ -269,7 +286,10 @@ async def confirm_reservation(reservation_id: str):
     summary="Cancel Reservation",
     description="Membatalkan reservasi"
 )
-async def cancel_reservation(reservation_id: str):
+async def cancel_reservation(
+    reservation_id: str,
+    current_user: User = Depends(get_current_active_user)
+    ):
     """
     Endpoint untuk membatalkan reservasi
     """
@@ -290,7 +310,10 @@ async def cancel_reservation(reservation_id: str):
     summary="Delete Reservation",
     description="Menghapus reservasi (hard delete)"
 )
-async def delete_reservation(reservation_id: str):
+async def delete_reservation(
+    reservation_id: str,
+    current_user: User = Depends(get_current_active_user)
+    ):
     """
     Endpoint untuk menghapus reservasi
     """

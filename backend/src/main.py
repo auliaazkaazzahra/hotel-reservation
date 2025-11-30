@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.reservation_controller import router as reservation_router
+from .api.auth_controller import router as auth_router
+from .config import settings
 
 # Inisialisasi FastAPI app
 app = FastAPI(
@@ -21,6 +23,7 @@ app.add_middleware(
 )
 
 # Register routers
+app.include_router(auth_router)
 app.include_router(reservation_router)
 
 # Root endpoint
@@ -31,7 +34,12 @@ async def root():
         "message": "Hotel Reservation System API",
         "version": "1.0.0",
         "docs": "/docs",
-        "redoc": "/redoc"
+        "redoc": "/redoc",
+        "authentication": "JWT Bearer Token",
+        "default_users": [
+            {"username": "admin", "password": "admin123"},
+            {"username": "user", "password": "user123"}
+        ]
     }
 
 # Health check endpoint
