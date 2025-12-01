@@ -83,7 +83,9 @@ Server berjalan di: **[http://localhost:8000](http://localhost:8000)**
 | POST   | `/api/reservations/{reservation_id}/confirm-payment` | Confirm Payment         |
 | POST   | `/api/reservations/{reservation_id}/confirm`         | Confirm Reservation     |
 | POST   | `/api/reservations/{reservation_id}/cancel`          | Cancel Reservation      |
-
+| POST   | `/api/auth/register`                                 | Register User           |
+| POST   | `/api/auth/login`                                    | Login User              |
+| POST   | `/api/auth/me`                                       | Requires Token          |
 ---
 
 ## **Testing dengan cURL**
@@ -129,7 +131,17 @@ curl -X POST "http://localhost:8000/api/reservations/{reservation_id}/confirm-pa
 ```bash
 curl -X POST "http://localhost:8000/api/reservations/{reservation_id}/cancel"
 ```
+### **4. Authentication**
 
+```bash
+curl -X POST "http://localhost:8000/api/auth/register"
+```
+```bash
+curl -X POST "http://localhost:8000/api/auth/login"
+```
+```bash
+curl -X POST "http://localhost:8000/api/auth/me"
+```
 ---
 
 ## **Author**
