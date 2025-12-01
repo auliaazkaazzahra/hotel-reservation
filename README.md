@@ -16,18 +16,18 @@ HOTEL-RESERVATION/
 │       │   │   └── reservation_detail.py
 │       │   └── value_objects/  		      # Value Objects
 │       │       └── value_objects.py
-│       ├── application/			            # Application Layer (Use Cases)
+│       ├── application/                      # Application Layer (Use Cases)
 │       │   └── reservation_service.py
-│       ├── infrastructure/		            # Infrastructure Layer
+│       ├── infrastructure/		              # Infrastructure Layer
 │       │   ├── reservation_repository.py
 │       │   └── auth/           		      # Authentication (New)
 │       │       ├── __init__.py
 │       │       ├── jwt_handler.py
 │       │       └── user_repository.py
-│       ├── api/				 # API Layer (Controllers)
-│       │   ├── reservation_controller.py # (Update)
-│       │   ├── auth_controller.py  	    # (New)
-│       │   └── dependencies.py    	      # (New)
+│       ├── api/				              # API Layer (Controllers)
+│       │   ├── reservation_controller.py     # (Update)
+│       │   ├── auth_controller.py  	      # (New)
+│       │   └── dependencies.py    	          # (New)
 │       ├── config.py           		      # (New)
 │       └── main.py             		      # (Update)
 ```
