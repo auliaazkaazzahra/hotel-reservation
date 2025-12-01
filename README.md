@@ -10,21 +10,26 @@ Sistem Reservasi Hotel ini dibangun menggunakan pendekatan **Domain-Driven Desig
 HOTEL-RESERVATION/
 ├── backend/
 │   └── src/
-│       ├── domain/              # Domain Layer (Core Business Logic)
-│       │   ├── entities/        # Aggregate Root & Entities
+│       ├── domain/              		      # Domain Layer (Core Business Logic)
+│       │   ├── entities/        		      # Aggregate Root & Entities
 │       │   │   ├── reservation.py
 │       │   │   └── reservation_detail.py
-│       │   └── value_objects/   # Value Objects
+│       │   └── value_objects/  		      # Value Objects
 │       │       └── value_objects.py
-│       ├── application/         # Application Layer (Use Cases)
+│       ├── application/			            # Application Layer (Use Cases)
 │       │   └── reservation_service.py
-│       ├── infrastructure/      # Infrastructure Layer
-│       │   └── reservation_repository.py
-│       ├── api/                 # API Layer (Controllers)
-│       │   └── reservation_controller.py
-│       └── main.py              # FastAPI Entry Point
-├── frontend/
-└── README.md
+│       ├── infrastructure/		            # Infrastructure Layer
+│       │   ├── reservation_repository.py
+│       │   └── auth/           		      # Authentication (New)
+│       │       ├── __init__.py
+│       │       ├── jwt_handler.py
+│       │       └── user_repository.py
+│       ├── api/				 # API Layer (Controllers)
+│       │   ├── reservation_controller.py # (Update)
+│       │   ├── auth_controller.py  	    # (New)
+│       │   └── dependencies.py    	      # (New)
+│       ├── config.py           		      # (New)
+│       └── main.py             		      # (Update)
 ```
 
 ---
