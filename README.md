@@ -106,6 +106,9 @@ HOTEL-RESERVATION/
 │   │   ├── test_aggregate.py
 │   │   └── test_value_objects.py
 │   │
+│   ├── .dockerignore
+│   ├── coverage.xml
+│   ├── docker-compose.ymml    
 │   ├── Dockerfile                     # Backend Dockerfile
 │   ├── pyproject.toml
 │   ├── pytest.ini
